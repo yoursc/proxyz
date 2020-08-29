@@ -1,0 +1,6 @@
+name: proxyz
+dependencies:
+- python=3.7.7
+- pip:
+  - Flask==1.1.2
+  - waitress=1.4.4
