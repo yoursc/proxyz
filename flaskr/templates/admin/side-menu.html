@@ -1,0 +1,32 @@
+<div class="layui-logo">
+    <span>Proxyz</span>
+</div>
+<ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
+    <li data-name="home" class="layui-nav-item layui-nav-itemed">
+        <a href="javascript:;" lay-tips="主页" lay-direction="2">
+            <i class="layui-icon layui-icon-home"></i>
+            <cite>主页</cite>
+            <span class="layui-nav-more"></span></a>
+        <dl class="layui-nav-child">
+            <dd data-name="console" class="layui-this">
+                <a lay-href="admin/console">控制台</a>
+            </dd>
+            <dd>
+                <a lay-href="auth/myinfo">个人中心</a>
+            </dd>
+        </dl>
+    </li>
+    <li data-name="user" class="layui-nav-item">
+        <a href="javascript:;" lay-tips="用户" lay-direction="2">
+            <i class="layui-icon layui-icon-user"></i>
+            <cite>用户</cite>
+            <span class="layui-nav-more"></span></a>
+        <dl class="layui-nav-child">
+            <dd>
+                <!-- todo 待补全 -->
+                <a lay-href="auth/repassword">用户管理</a>
+            </dd>
+        </dl>
+    </li>
+    <span class="layui-nav-bar"></span>
+</ul>

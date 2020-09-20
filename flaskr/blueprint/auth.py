@@ -8,15 +8,22 @@
 @Maintainer : Ven
 @Software   : PyCharm
 """
+import json
 import functools
-
+import flask_login
 from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
 
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from flaskr.db import get_db
+from flaskr.login import User
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
+
+
+@bp.route('/')
+def index():
+    return render_template('auth/index.html')
 
 
 @bp.route('/register', methods=['GET', 'POST'])
@@ -45,27 +52,64 @@ def register():
     flash(error)
 
 
-@bp.route('/login', methods=['GET', 'POST'])
+@bp.route('/login', methods=['GET'])
 def login():
-    if request.method == 'GET':
-        return render_template('auth/login.html')
-    username = request.form['username']
-    password = request.form['password']
+    return render_template('auth/login.html')
+
+
+@bp.route('/login', methods=['POST'])
+def login_api():
+    data = json.loads(str(request.data, 'utf-8'))
+    username = data['username']
+    password = data['password']
     db = get_db()
     error = None
-    user = db.execute(
-        'SELECT * FROM user WHERE username = ?', (username,)
+    q = db.execute(
+        'SELECT * FROM user WHERE active = 1 and username = ?', (username,)
     ).fetchone()
-    if user is None:
+    if q is None:
         error = 'Incorrect username.'
-    elif not check_password_hash(user['password'], password):
+    elif not check_password_hash(q['password'], password):
         error = 'Incorrect password.'
-    print(error)
     if error is None:
-        session.clear()
-        session['user_id'] = user['id']
-        return redirect(url_for('index'))
-    flash(error)
+        user = User()
+        user.user_id = q['id']
+        session['user_id'] = q['id']
+        flask_login.login_user(user)
+        return {'status': 200, 'message': '登录成功'}
+    return {'status': 300, 'message': '登录失败'}
+
+
+@bp.route('/logout')
+@flask_login.login_required
+def logout():
+    session.clear()
+    flask_login.logout_user()
+    return redirect(url_for('auth.login'))
+
+@bp.route('/myinfo',methods = ['GET'])
+@flask_login.login_required
+def myinfo():
+    # todo 待补全
+    return ""
+
+@bp.route('/repassword',methods = ['GET'])
+@flask_login.login_required
+def repassword():
+    # todo 待补全
+    return ""
+
+@bp.route('/repassword',methods = ['POST'])
+@flask_login.login_required
+def repassword_api():
+    # todo 待补全
+    return ""
+
+
+@bp.route('/protected')
+@flask_login.login_required
+def protected():
+    return 'haha'
 
 
 @bp.before_app_request
@@ -77,12 +121,6 @@ def load_logged_in_user():
         g.user = get_db().execute(
             'SELECT * FROM user WHERE id = ?', (user_id,)
         ).fetchone()
-
-
-@bp.route('/logout')
-def logout():
-    session.clear()
-    return redirect(url_for('index'))
 
 
 def login_required(view):

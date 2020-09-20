@@ -15,3 +15,8 @@ CREATE TABLE post (
   body TEXT NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id)
 );
+
+INSERT INTO user
+(id,username,password)
+values
+(0,'root','pbkdf2:sha256:150000$8nnBOQDD$6fa881612104f5b5677c213f38a9f71267aa32a055f27b10f217bf11dd993ced');

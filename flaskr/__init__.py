@@ -10,8 +10,10 @@
 """
 import os
 
-from flask import Flask, escape, request, redirect, url_for, abort, make_response, render_template
-from . import db, auth, blog, error
+from flask import Flask
+
+from . import db, error
+from .blueprint import admin, auth, blog
 
 
 def create_app(test_config=None):
@@ -29,22 +31,17 @@ def create_app(test_config=None):
 
     # ensure the instance folder exists
     try:
+        app.logger.info(f'instance path : {app.instance_path}')
         os.makedirs(app.instance_path)
     except OSError:
         pass
-
+    import flaskr.login
+    login.init_app(app)
     db.init_app(app)
     error.init_app(app)
     app.register_blueprint(auth.bp)
+    app.register_blueprint(admin.bp)
     app.register_blueprint(blog.bp)
     app.add_url_rule('/', endpoint='index')
 
-    @app.route('/user/<username>')
-    def profile(username):
-        return '{}\'s profile'.format(escape(username))
-
     return app
-
-
-if __name__ == '__main__':
-    create_app()

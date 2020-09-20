@@ -4,3 +4,5 @@ flaskr/__pycache__/
 build/
 flaskr.egg-info/
 dist/
+*.pyc
+flaskr/static/layuiadmin/
