@@ -1,20 +1,11 @@
+<div class="layui-logo">Proxyz</div>
 <ul class="layui-nav layui-layout-left">
     <li class="layui-nav-item">
-        <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
-            <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
-        </a>
-    </li>
-    <li class="layui-nav-item">
-        <a href="javascript:;" layadmin-event="refresh" title="刷新">
-            <i class="layui-icon layui-icon-refresh-3"></i>
-        </a>
-    </li>
-    <li class="layui-nav-item">
-        <a href="javascript:;">解决方案</a>
-        <dl class="layui-nav-child"> <!-- 二级菜单 -->
-            <dd><a href="">移动模块</a></dd>
-            <dd><a href="">后台模版</a></dd>
-            <dd><a href="">电商平台</a></dd>
+        <a href="javascript:;">测试菜单</a>
+        <dl class="layui-nav-child">
+            <dd><a href="">菜单一</a></dd>
+            <dd><a href="">菜单二</a></dd>
+            <dd><a href="">菜单三</a></dd>
         </dl>
     </li>
     <li class="layui-nav-item layui-hide-xs">
@@ -22,16 +13,15 @@
                layadmin-event="serach" lay-action="">
         <!-- 尚未开发 -->
     </li>
-    <span class="layui-nav-bar"></span>
 </ul>
 <ul class="layui-nav layui-layout-right" lay-filter="">
     <li class="layui-nav-item" >
-        <a href="{{ url_for('auth.myinfo') }}">{{ g.user["username"] }}</a>
+        <a href="">{{ g.user["username"] }}</a>
+        <dl class="layui-nav-child">
+            <dd><a href="{{ url_for('auth.myinfo') }}">用户中心</a></dd>
+            <dd><a href="">修改密码</a></dd>
+            <hr>
+            <dd><a href="{{ url_for('auth.logout') }}">退出登录</a></dd>
+        </dl>
     </li>
-    <li class="layui-nav-item">
-        <a href="{{ url_for('auth.logout') }}">退出</a>
-    </li>
-    <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm">
-        <a href="javascript:;" layadmin-event="more"><i class="layui-icon layui-icon-more-vertical"></i></a>
-    </li>
-    <span class="layui-nav-bar" style="left: 258px; top: 48px; width: 0px; opacity: 0;"></span></ul>
+</ul>
