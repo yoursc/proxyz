@@ -1,14 +1,26 @@
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>{% block title %}Auth Info{% endblock %}</h1>
+{% block side_menu %}
+    {% include 'admin/side-menu.html' %}
 {% endblock %}
 
-{% block content %}
-    <table>
-        <tr><td>user_id</td><td>{{ g.user['id'] }}</td></tr>
-        <tr><td>username</td><td>{{ g.user['username'] }}</td></tr>
-    </table>
-    <p><a href="">reset password</a></p>
-    <p><a href="">rename</a></p>
+{% block header %}
+    {% include 'admin/header.html' %}
+{% endblock %}
+
+{% block body %}
+    <div class="layadmin-tabsbody-item layui-show">
+        <table>
+            <tr>
+                <td>user_id</td>
+                <td>{{ g.user['id'] }}</td>
+            </tr>
+            <tr>
+                <td>username</td>
+                <td>{{ g.user['username'] }}</td>
+            </tr>
+        </table>
+        <p><a href="">reset password</a></p>
+        <p><a href="">rename</a></p>
+    </div>
 {% endblock %}
