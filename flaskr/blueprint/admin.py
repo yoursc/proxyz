@@ -20,7 +20,7 @@ from flaskr.login import User
 bp = Blueprint('admin', __name__, url_prefix='/admin')
 
 @bp.route('/')
+@flask_login.login_required
 def index():
-    # todo 添加 index 子模版
     return render_template('admin/console.html')
 

@@ -16,7 +16,7 @@
 
     set FLASK_ENV=development
     set FLASK_APP=flaskr
-    flask init-db
+    flask init
     flask run
 
 #### Linux 生产环境（使用 WSGI 启动）

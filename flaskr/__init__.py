@@ -12,6 +12,7 @@ import os
 
 from flask import Flask
 
+import flaskr.login
 from . import db, error
 from .blueprint import admin, auth, blog
 
@@ -35,7 +36,6 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
-    import flaskr.login
     login.init_app(app)
     db.init_app(app)
     error.init_app(app)

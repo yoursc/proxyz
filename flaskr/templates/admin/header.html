@@ -11,14 +11,13 @@
     <li class="layui-nav-item layui-hide-xs">
         <input type="text" placeholder="搜索..." autocomplete="off" class="layui-input layui-input-search"
                layadmin-event="serach" lay-action="">
-        <!-- 尚未开发 -->
     </li>
 </ul>
 <ul class="layui-nav layui-layout-right" lay-filter="">
     <li class="layui-nav-item" >
-        <a href="">{{ g.user["username"] }}</a>
+        <a>{{ g.user["username"] }}</a>
         <dl class="layui-nav-child">
-            <dd><a href="{{ url_for('auth.myinfo') }}">用户中心</a></dd>
+            <dd><a href="{{ url_for('auth.index') }}">用户中心</a></dd>
             <dd><a href="">修改密码</a></dd>
             <hr>
             <dd><a href="{{ url_for('auth.logout') }}">退出登录</a></dd>

@@ -11,8 +11,10 @@
 import sqlite3
 
 import click
+import uuid
 from flask import Flask, current_app, g
 from flask.cli import with_appcontext
+from werkzeug.security import generate_password_hash
 
 
 def get_db():
@@ -31,17 +33,27 @@ def close_db(e=None):
         db.close()
 
 
-def init_db():
+@click.command('init')
+@with_appcontext
+def init_db_command():
     db = get_db()
+    click.echo('Init database')
     with current_app.open_resource('schema.sql') as f:
         db.executescript(f.read().decode('utf8'))
 
+    click.echo('Init root user')
+    db.execute(
+        'INSERT INTO user (id, username, password) VALUES (?, ?, ?)',
+        (0, 'root', generate_password_hash('root'))
+    )
 
-@click.command('init-db')
-@with_appcontext
-def init_db_command():
-    init_db()
-    click.echo('Initialized the database.')
+    my_uuid = str(uuid.uuid4())
+    click.echo(f'Init my-uuid: {my_uuid}')
+    db.execute(
+        'INSERT INTO config (k, v) VALUES (?, ?)',
+        ('my-uuid', my_uuid)
+    )
+    click.echo('Initialized success.')
 
 
 def init_app(app: Flask):

@@ -5,7 +5,7 @@
             <cite>主页</cite>
         </a>
         <dl class="layui-nav-child">
-            <dd><a href="javascript:;">控制台</a></dd>
+            <dd><a href="{{ url_for('admin.index') }}">控制台</a></dd>
             <dd><a href="{{ url_for('auth.index') }}">个人中心</a></dd>
         </dl>
     </li>
@@ -16,7 +16,6 @@
         </a>
         <dl class="layui-nav-child">
             <dd>
-            <!-- todo 待补全 -->
             <dd><a href="javascript:;">用户管理</a></dd>
             </dd>
         </dl>

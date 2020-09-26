@@ -65,7 +65,7 @@ def login_api():
     db = get_db()
     error = None
     q = db.execute(
-        'SELECT * FROM user WHERE active = 1 and username = ?', (username,)
+        'SELECT * FROM user WHERE username = ?', (username,)
     ).fetchone()
     if q is None:
         error = 'Incorrect username.'
@@ -87,22 +87,16 @@ def logout():
     flask_login.logout_user()
     return redirect(url_for('auth.login'))
 
-@bp.route('/myinfo',methods = ['GET'])
-@flask_login.login_required
-def myinfo():
-    # todo 待补全
-    return ""
 
-@bp.route('/repassword',methods = ['GET'])
+@bp.route('/repassword', methods=['GET'])
 @flask_login.login_required
 def repassword():
-    # todo 待补全
     return ""
 
-@bp.route('/repassword',methods = ['POST'])
+
+@bp.route('/repassword', methods=['POST'])
 @flask_login.login_required
 def repassword_api():
-    # todo 待补全
     return ""
 
 
