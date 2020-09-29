@@ -53,6 +53,7 @@ def init_db_command():
         'INSERT INTO config (k, v) VALUES (?, ?)',
         ('my-uuid', my_uuid)
     )
+    db.commit()
     click.echo('Initialized success.')
 
 
