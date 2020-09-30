@@ -9,11 +9,29 @@
 {% endblock %}
 
 {% block body %}
-    <div class="layadmin-tabsbody-item layui-show">
-        <p>Welcome.</p>
-        <a>hahahah</a>
+    <div class="layui-card layui-show">
+        <div class="layui-card-body">
+            <table id="node-list" lay-filter="node-list"></table>
+        </div>
     </div>
 {% endblock %}
 
 {% block script %}
+    <script>
+        layui.use('table', function () {
+            var table = layui.table;
+            table.render({
+                elem: '#node-list'
+                , url: '/admin/node/list'
+                , cols: [[
+                    {type: 'checkbox'}
+                    , {field: 'id', title: 'ID', width: 80, sort: true}
+                    , {field: 'hostname', title: '域名', width: 80}
+                    , {field: 'username', title: '帐号', width: 80}
+                    , {field: 'password', title: '密码', width: 80}
+                    , {field: 'uuid', title: '唯一识别码', width: 200}
+                ]]
+            });
+        });
+    </script>
 {% endblock %}

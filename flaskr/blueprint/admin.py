@@ -53,3 +53,23 @@ def user_list():
 @flask_login.login_required
 def node():
     return render_template('admin/page-node.html')
+
+
+@bp.route('/node/list', methods=['GET'])
+@flask_login.login_required
+def node_list():
+    db = get_db()
+    query = db.execute(
+        'SELECT id, hostname, username, password, uuid FROM node'
+    ).fetchall()
+    print(query)
+    data = []
+    for row in query:
+        data.append({
+            "id": row['id']
+            , "hostname": row['hostname']
+            , "username": row['username']
+            , "password": row['password']
+            , "uuid": row['uuid']
+        })
+    return {"code": 0, "msg": "", "count": 1, "data": data}

@@ -13,7 +13,8 @@ CREATE TABLE node (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   hostname TEXT NOT NULL,
   username TEXT UNIQUE NOT NULL,
-  password TEXT NOT NULL
+  password TEXT NOT NULL,
+  uuid TEXT
 );
 
 DROP TABLE IF EXISTS post;
