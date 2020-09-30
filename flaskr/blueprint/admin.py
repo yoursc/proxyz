@@ -19,8 +19,37 @@ from flaskr.login import User
 
 bp = Blueprint('admin', __name__, url_prefix='/admin')
 
-@bp.route('/')
+
+@bp.route('/', methods=['GET'])
 @flask_login.login_required
 def index():
-    return render_template('admin/console.html')
+    return render_template('admin/page-console.html')
 
+
+@bp.route('/user', methods=['GET'])
+@flask_login.login_required
+def user():
+    return render_template('admin/page-user.html')
+
+
+@bp.route('/user/list', methods=['GET'])
+@flask_login.login_required
+def user_list():
+    db = get_db()
+    query = db.execute(
+        'SELECT id, username, effect FROM user'
+    ).fetchall()
+    data = []
+    for row in query:
+        data.append({
+            "id": row['id']
+            , "username": row['username']
+            , "effect": row['effect']
+        })
+    return {"code": 0, "msg": "", "count": 1, "data": data}
+
+
+@bp.route('/node', methods=['GET'])
+@flask_login.login_required
+def node():
+    return render_template('admin/page-node.html')

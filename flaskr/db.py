@@ -43,8 +43,10 @@ def init_db_command():
 
     click.echo('Init root user')
     db.execute(
-        'INSERT INTO user (id, username, password) VALUES (?, ?, ?)',
-        (0, 'root', generate_password_hash('root'))
+        'INSERT INTO user (id, username, password, effect) '
+        'VALUES '
+        '(?, ?, ?, ?)',
+        (0, 'root', generate_password_hash('root'), '1')
     )
 
     my_uuid = str(uuid.uuid4())

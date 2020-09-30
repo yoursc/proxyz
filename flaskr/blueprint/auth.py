@@ -65,7 +65,9 @@ def login_api():
     db = get_db()
     error = None
     q = db.execute(
-        'SELECT * FROM user WHERE username = ?', (username,)
+        'SELECT id, username, password FROM user '
+        'WHERE username = ? and effect = ?'
+        , (username, "1")
     ).fetchone()
     if q is None:
         error = 'Incorrect username.'

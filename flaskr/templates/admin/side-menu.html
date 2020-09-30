@@ -11,13 +11,12 @@
     </li>
     <li class="layui-nav-item layui-nav-itemed">
         <a class="" href="javascript:;">
-            <i class="layui-icon layui-icon-user"></i>
-            <cite>用户</cite>
+            <i class="layui-icon layui-icon-dollar"></i>
+            <cite>管理</cite>
         </a>
         <dl class="layui-nav-child">
-            <dd>
-            <dd><a href="javascript:;">用户管理</a></dd>
-            </dd>
+            <dd><a href="{{ url_for('admin.user') }}">用户管理</a></dd>
+            <dd><a href="{{ url_for('admin.node') }}">节点管理</a></dd>
         </dl>
     </li>
 </ul>

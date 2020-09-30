@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block side_menu %}
+    {% include 'admin/side-menu.html' %}
+{% endblock %}
+
+{% block header %}
+    {% include 'admin/header.html' %}
+{% endblock %}
+
+{% block body %}
+    <div class="layui-card layui-show">
+        <div class="layui-card-body">
+            <table id="user-list" lay-filter="user-list"></table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        layui.use('table', function () {
+            var table = layui.table;
+            table.render({
+                elem: '#user-list'
+                , url: '/admin/user/list'
+                , cols: [[
+                    {type: 'checkbox'}
+                    , {field: 'id', title: 'ID', width: 80, sort: true}
+                    , {field: 'username', title: '用户名', width: 80}
+                    , {field: 'effect', title: '活跃', width: 200, sort: true}
+                ]]
+            });
+        });
+    </script>
+{% endblock %}
